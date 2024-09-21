@@ -1,0 +1,5 @@
+broadcast-interval: 300  # in seconds
+messages:
+  - "<green>Welkom op onze server!"
+  - "<blue>Vergeet niet onze regels te lezen."
+  - "<gold>Veel plezier met spelen!"
