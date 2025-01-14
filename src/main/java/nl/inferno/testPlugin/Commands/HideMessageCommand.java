@@ -17,7 +17,6 @@ public class HideMessageCommand implements CommandExecutor {
         this.plugin = plugin;
         this.luckPerms = luckPerms;
     }
-
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if (!(sender instanceof Player)) {
@@ -28,29 +27,26 @@ public class HideMessageCommand implements CommandExecutor {
         Player player = (Player) sender;
 
         if (args.length != 1) {
-            player.sendMessage("Usage: /hidemessage <messageIndex>");
+            player.sendMessage("Usage: /hidemessage <messageHash>");
             return true;
         }
 
-        int messageIndex;
         try {
-            messageIndex = Integer.parseInt(args[0]);
+            int messageHash = Integer.parseInt(args[0]);
+            String permission = "testplugin.hide." + messageHash;
+
+            User user = luckPerms.getUserManager().getUser(player.getUniqueId());
+            if (user != null) {
+                user.data().add(Node.builder(permission).build());
+                luckPerms.getUserManager().saveUser(user);
+                player.sendMessage("You will no longer see this message.");
+            } else {
+                player.sendMessage("An error occurred while updating your permissions.");
+            }
         } catch (NumberFormatException e) {
-            player.sendMessage("Invalid message index.");
-            return true;
-        }
-
-        String permission = "testplugin.hide." + messageIndex;
-
-        User user = luckPerms.getUserManager().getUser(player.getUniqueId());
-        if (user != null) {
-            user.data().add(Node.builder(permission).build());
-            luckPerms.getUserManager().saveUser(user);
-            player.sendMessage("You will no longer see this message.");
-        } else {
-            player.sendMessage("An error occurred while updating your permissions.");
+            player.sendMessage("Invalid message hash.");
         }
 
         return true;
     }
-}
+    }

@@ -1,5 +1,27 @@
-broadcast-interval: 300  # in seconds
-messages:
-  - "<green>Welkom op onze server!"
-  - "<blue>Vergeet niet onze regels te lezen."
+broadcast-interval: 5  # in seconds
+
+# Default messages for everyone
+default_messages:
   - "<gold>Veel plezier met spelen!"
+  - "<green>Welkom op onze server!"
+
+# VIP messages
+vip_messages:
+  permission: "testplugin.messages.vip"
+  messages:
+    - "<green>Je bent een VIP speler!"
+    - "<yellow>Bedankt voor je support!"
+
+# MVP messages
+mvp_messages:
+  permission: "testplugin.messages.mvp"
+  messages:
+    - "<blue>MVP voordelen zijn geweldig!"
+    - "<aqua>Speciale MVP aankondiging!"
+
+# Moderator messages
+moderator_messages:
+  permission: "testplugin.messages.moderator"
+  messages:
+    - "<red>Moderator bericht!"
+    - "<gold>Staff aankondiging!"
